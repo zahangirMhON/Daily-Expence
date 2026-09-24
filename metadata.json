@@ -1,0 +1,10 @@
+{
+  "name": "AI খরচ হিসাব",
+  "description": "Production-Ready Offline-First AI Personal Finance & Accounting Web App with Bengali Natural Language Understanding, Live Account Ledgers & Financial Analytics",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

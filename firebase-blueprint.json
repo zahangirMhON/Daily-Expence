@@ -1,0 +1,46 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile & Settings",
+      "description": "User profile, configuration preferences, and synchronization metadata",
+      "properties": {
+        "userId": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User Google email" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "photoURL": { "type": "string", "description": "Avatar URL" },
+        "language": { "type": "string", "enum": ["bn", "en"], "description": "UI language" },
+        "theme": { "type": "string", "enum": ["light", "dark", "system"], "description": "UI theme" },
+        "lastSyncedAt": { "type": "string", "format": "date-time", "description": "ISO timestamp of last sync" },
+        "updatedAt": { "type": "number", "description": "Unix timestamp in ms" }
+      },
+      "required": ["userId", "email", "updatedAt"]
+    },
+    "UserFinanceData": {
+      "title": "User Full Financial Store",
+      "description": "Synced store of accounts, transactions, categories, people, budgets, recurring and reminders",
+      "properties": {
+        "userId": { "type": "string", "description": "Owner user ID" },
+        "accounts": { "type": "array", "description": "List of bank, cash, mobile wallet and credit accounts" },
+        "transactions": { "type": "array", "description": "Ledger of all financial transactions" },
+        "categories": { "type": "array", "description": "Income and expense categories" },
+        "people": { "type": "array", "description": "People involved in loans and debts" },
+        "budgets": { "type": "array", "description": "Monthly category budget allocations" },
+        "recurring": { "type": "array", "description": "Scheduled recurring expenses and bills" },
+        "reminders": { "type": "array", "description": "Pending and paid bill reminders" },
+        "settings": { "type": "object", "description": "Application settings" },
+        "updatedAt": { "type": "number", "description": "Timestamp in milliseconds" }
+      },
+      "required": ["userId", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User account document with profile and sync state"
+    },
+    "/users/{userId}/data/finance": {
+      "schema": "UserFinanceData",
+      "description": "Complete synced financial ledger state for the authenticated user"
+    }
+  }
+}
